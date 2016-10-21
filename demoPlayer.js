@@ -175,6 +175,7 @@ console.log(vjsId)
 			}	
 		}
 		console.log('Done loading player')
+		$(document).trigger('playerLoaded');
 	});
 }
 
