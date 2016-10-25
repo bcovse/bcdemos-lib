@@ -80,7 +80,7 @@ function createPlayer(vjsId, pid, div, inVideo) {
 	// console.log("div: " + div)
 	// console.log("inVideo: " + inVideo)
 
-	console.log("Looking for player config(pid):" + pid)
+	console.log("Looking for player config(pid):" + pid);
 	var myCfg = _cfg.players[pid];
 	myCfg['pid'] = pid;
 	var product = myCfg['product'] || 'vc';
@@ -145,7 +145,7 @@ function createPlayer(vjsId, pid, div, inVideo) {
 
 		playerHTML += ' ></video></div></div>';
 
-console.log(vjsId)
+
 		console.log("PlayerInnerHTML: " + playerHTML);
 		document.getElementById(config.targetDiv).innerHTML = playerHTML;
 		var newDiv = document.getElementById(config.playerId);
@@ -175,7 +175,7 @@ console.log(vjsId)
 			}	
 		}
 		console.log('Done loading player')
-		$(document).trigger('playerLoaded');
+		$(document).trigger('playerLoaded', vid);
 	});
 }
 
