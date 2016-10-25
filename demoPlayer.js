@@ -159,22 +159,25 @@ function createPlayer(vjsId, pid, div, inVideo) {
 		newDiv.style.width = "100%";
 		newDiv.style.height = "100%";
 
-		bc(document.getElementById(config.playerId));
+		var player = bc(document.getElementById(config.playerId));
 
 		loadPlugins(vjsId, pid, myCfg);
 
-		console.log( "Product is " + product)
+		console.log( "Product is " + product);
 
 		if ( product == "perform" && video) {
-			console.log('Using Perform, Loading Video')
-			vid = _cfg.videos[video] || {}
+			console.log('Using Perform, Loading Video');
+			vid = _cfg.videos[video] || {};
 			if (! vid) {
 				console.log('Could not find video: ' + video)
 			} else {
 				loadVideo(vjsId, vid);
 			}	
 		}
-		console.log('Done loading player')
+		else if (product == 'vc') {
+			vid = player;
+		}
+		console.log('Done loading player');
 		$(document).trigger('playerLoaded', vid);
 	});
 }
@@ -182,7 +185,7 @@ function createPlayer(vjsId, pid, div, inVideo) {
 function getScripts(scripts, callback) {
     var progress = 0;
     scripts.forEach(function(script) { 
-    	console.log('loading ' + script)
+    	console.log('loading ' + script);
         $.getScript(script, function () {
             if (++progress == scripts.length) callback();
         }); 
@@ -191,13 +194,13 @@ function getScripts(scripts, callback) {
 
 function loadPlugins( vjsId, pid, config ) {
 
-	console.log('**** initializing Plugins')
+	console.log('**** initializing Plugins');
 
 	var player  = videojs.getPlayers()[vjsId]; 
 	var plugins = config.plugins || {};
 
 	for (var pluginName in plugins) {
-		var plugin = plugins[pluginName]
+		var plugin = plugins[pluginName];
 		if (plugin.css) {
 			$("<link/>", {
 			   rel: "stylesheet",
