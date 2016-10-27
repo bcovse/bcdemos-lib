@@ -128,6 +128,8 @@ function createPlayer(vjsId, pid, div, inVideo) {
 		playerHTML += '\" data-player=\"' + config.dataPlayerId + 
 				  '\" data-embed=\"default\" class=\"video-js\"';
 
+    playerHTML += ' preload="auto"';
+
 		if (myCfg.noposter)		  
 			playerHTML += ' poster ';
 
@@ -159,7 +161,10 @@ function createPlayer(vjsId, pid, div, inVideo) {
 		newDiv.style.width = "100%";
 		newDiv.style.height = "100%";
 
+    console.log(document.getElementById(config.playerId));
+
 		var player = bc(document.getElementById(config.playerId));
+    player.preload('auto')
 
 		loadPlugins(vjsId, pid, myCfg);
 
@@ -178,7 +183,9 @@ function createPlayer(vjsId, pid, div, inVideo) {
 			vid = player;
 		}
 		console.log('Done loading player');
-		$(document).trigger('playerLoaded', vid);
+		player.on('loadedmetadata', function() {
+      $(document).trigger('playerLoaded', vid);
+    });
 	});
 }
 
